@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User Management - Eliot Downloader Admin</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <div class="brand">
+        <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+          <div class="brand-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <div class="brand-name">Eliot Downloader</div>
+        </a>
+      </div>
+
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/admin/dashboard" class="nav-link">Dashboard</a>
+        <a href="/admin/users" class="nav-link active">Users</a>
+        <a href="/admin/inbox" class="nav-link">Inbox</a>
+        <a href="/admin/change_password" class="nav-link">Settings</a>
+        <a href="/logout" class="nav-link">Logout</a>
+      </nav>
+    </header>
+
+    <section class="admin-container">
+      <div class="admin-header">
+        <h1>User Management</h1>
+        <p>Manage registered users and view their activity</p>
+      </div>
+
+      <div class="content-card">
+        <div class="table-header">
+          <h2>Registered Users ({{ users|length }})</h2>
+          <div class="search-box">
+            <input type="text" id="userSearch" placeholder="Search users..." />
+          </div>
+        </div>
+
+        <div class="users-table">
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Email</th>
+                  <th>Joined</th>
+                  <th>Downloads</th>
+                  <th>Last Activity</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody">
+                {% for user in users %}
+                <tr data-user-id="{{ user.id }}" class="user-row">
+                  <td>
+                    <div class="user-cell">
+                      <div class="user-avatar">{{ user.username[0].upper() }}</div>
+                      <div class="user-info">
+                        <div class="user-name">{{ user.username }}</div>
+                        <div class="user-id">ID: {{ user.id }}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.created_at[:10] }}</td>
+                  <td>
+                    <span class="download-count">{{ user.total_downloads or 0 }}</span>
+                  </td>
+                  <td>
+                    {% if user.last_download %}
+                      {{ user.last_download[:16] }}
+                    {% else %}
+                      <span class="text-muted">Never</span>
+                    {% endif %}
+                  </td>
+                  <td>
+                    <span class="status-badge status-{{ 'active' if user.is_active else 'inactive' }}">
+                      {{ 'Active' if user.is_active else 'Inactive' }}
+                    </span>
+                  </td>
+                  <td>
+                    <div class="action-buttons">
+                      <button class="btn btn-sm btn-secondary view-user" data-user-id="{{ user.id }}">
+                        View Details
+                      </button>
+                      {% if user.is_active %}
+                        <button class="btn btn-sm btn-warning deactivate-user" data-user-id="{{ user.id }}">
+                          Deactivate
+                        </button>
+                      {% else %}
+                        <button class="btn btn-sm btn-success activate-user" data-user-id="{{ user.id }}">
+                          Activate
+                        </button>
+                      {% endif %}
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Details Modal -->
+      <div id="userModal" class="modal" style="display: none;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>User Details</h3>
+            <button class="modal-close">&times;</button>
+          </div>
+          <div class="modal-body" id="userModalBody">
+            <!-- User details will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>Eliot Downloader Admin Panel</div>
+        <div class="links">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>

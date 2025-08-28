@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terms of Service - VaultLoad | Video Downloader</title>
+  <meta name="description" content="Terms and conditions for using our video downloading service." />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <header class="site-header" aria-label="Site header">
+      <div class="brand" aria-label="Brand">
+        <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+          <div class="brand-logo" aria-hidden="true">
+            <!-- Download icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <div class="brand-name">Eliot Downloader</div>
+        </a>
+      </div>
+
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/contact" class="nav-link">Contact</a>
+      </nav>
+    </header>
+
+    <section class="page-content">
+      <div class="page-header">
+        <h1>Terms of Service</h1>
+        <p class="page-subtitle">Please read these terms carefully before using our service</p>
+        <div class="page-meta">Last updated: {{ current_date }}</div>
+      </div>
+
+      <div class="content-card">
+        <div class="policy-section">
+          <h2>Acceptance of Terms</h2>
+          <p>By accessing and using VaultLoad ("the Service"), you agree to be bound by these Terms of Service ("Terms"). If you disagree with any part of these terms, you may not access the Service.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>Description of Service</h2>
+          <p>VaultLoad is a web-based tool that allows users to download videos and audio from various online platforms. The Service acts as an intermediary, facilitating downloads from supported platforms using publicly available tools and methods.</p>
+          
+          <h3>Supported Features</h3>
+          <ul>
+            <li>Video and audio downloading from supported platforms</li>
+            <li>Multiple quality options where available</li>
+            <li>Real-time download progress tracking</li>
+            <li>Cookie-based authentication for restricted content</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>User Responsibilities</h2>
+          <h3>Acceptable Use</h3>
+          <p><strong>You agree to use the Service only for lawful purposes and in accordance with these Terms.</strong></p>
+          
+          <ul>
+            <li><strong>Copyright Compliance:</strong> You are solely responsible for ensuring you have the right to download and possess any content you process through our Service</li>
+            <li><strong>Personal Use:</strong> Downloaded content should be for personal, non-commercial use unless you have explicit permission</li>
+            <li><strong>Platform Terms:</strong> You must comply with the terms of service of the original content platforms</li>
+            <li><strong>Content Ownership:</strong> Only download content you own, have created, or have explicit permission to download</li>
+          </ul>
+
+          <h3>Prohibited Uses</h3>
+          <p>You may NOT use the Service to:</p>
+          <ul>
+            <li>Download copyrighted content without proper authorization</li>
+            <li>Violate any platform's terms of service or community guidelines</li>
+            <li>Download content for commercial redistribution without licenses</li>
+            <li>Access private or restricted content without authorization</li>
+            <li>Overload our servers with excessive requests</li>
+            <li>Attempt to circumvent any security measures</li>
+            <li>Upload malicious files or attempt to harm our infrastructure</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>Cookie Upload Feature</h2>
+          <p>Our Service allows users to upload browser cookies to access content that requires authentication. By using this feature:</p>
+          <ul>
+            <li>You confirm you have legitimate access to the accounts associated with the cookies</li>
+            <li>You understand cookies are automatically deleted after 24 hours</li>
+            <li>You agree not to upload cookies from accounts you don't own or control</li>
+            <li>You acknowledge that cookie usage must comply with the original platform's terms</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>Service Limitations</h2>
+          <h3>Availability</h3>
+          <ul>
+            <li>The Service is provided "as-is" without guarantees of uptime or availability</li>
+            <li>We may temporarily suspend the Service for maintenance or updates</li>
+            <li>Platform compatibility may change due to external factors beyond our control</li>
+          </ul>
+
+          <h3>Technical Limitations</h3>
+          <ul>
+            <li>File size limits may apply based on server capacity</li>
+            <li>Download speeds depend on source platform and server load</li>
+            <li>Some content may be unavailable due to geographic restrictions or platform changes</li>
+            <li>Quality options depend on what the source platform provides</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>Intellectual Property</h2>
+          <h3>Service Content</h3>
+          <p>The VaultLoad interface, design, and underlying code are protected by copyright and other intellectual property laws. You may not copy, modify, or redistribute our Service without permission.</p>
+
+          <h3>Downloaded Content</h3>
+          <p>VaultLoad does not claim ownership of any content you download. All rights in downloaded content remain with the original creators and copyright holders. You are responsible for respecting these rights.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>Privacy and Data</h2>
+          <p>Your use of the Service is also governed by our <a href="/privacy">Privacy Policy</a>, which explains how we collect, use, and protect your information.</p>
+          
+          <h3>Data Retention</h3>
+          <ul>
+            <li>Downloaded files are automatically deleted after download completion</li>
+            <li>Cookie files are automatically deleted after 24 hours</li>
+            <li>Usage logs are retained for 30 days for technical and security purposes</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>Disclaimers</h2>
+          <h3>No Warranties</h3>
+          <p>THE SERVICE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
+
+          <h3>Content Accuracy</h3>
+          <p>We do not guarantee the accuracy, completeness, or quality of downloaded content. The Service relies on third-party platforms and tools that may change without notice.</p>
+
+          <h3>Legal Compliance</h3>
+          <p>Users are solely responsible for ensuring their use of the Service complies with applicable laws in their jurisdiction. We do not provide legal advice regarding copyright or other intellectual property matters.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>Limitation of Liability</h2>
+          <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, VAULTLOAD SHALL NOT BE LIABLE FOR:</p>
+          <ul>
+            <li>Any indirect, incidental, special, or consequential damages</li>
+            <li>Loss of profits, data, or business opportunities</li>
+            <li>Damages arising from your use or inability to use the Service</li>
+            <li>Issues arising from downloaded content or third-party platforms</li>
+            <li>Any amount exceeding $100 in total</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>Termination</h2>
+          <p>We may terminate or suspend your access to the Service at any time, with or without cause, including if you violate these Terms. Upon termination, your right to use the Service ceases immediately.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>Changes to Terms</h2>
+          <p>We reserve the right to modify these Terms at any time. Changes will be effective when posted on this page with an updated "Last Updated" date. Continued use of the Service after changes constitutes acceptance of the new Terms.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>Governing Law</h2>
+          <p>These Terms are governed by the laws of the United States. Any disputes will be resolved in the courts of the United States.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>Contact Information</h2>
+          <p>If you have questions about these Terms, please <a href="/contact">contact us</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>
+          <strong>Heads‑up:</strong> Some platforms restrict downloads in their Terms. Only download content you own or have permission to use.
+        </div>
+        <div class="links">
+          <a href="/privacy" rel="nofollow">Privacy</a>
+          <a href="/terms" rel="nofollow">Terms</a>
+          <a href="/contact" rel="nofollow">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

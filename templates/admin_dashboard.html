@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard - Eliot Downloader</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <div class="brand">
+        <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+          <div class="brand-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <div class="brand-name">Eliot Downloader</div>
+        </a>
+      </div>
+
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/admin/dashboard" class="nav-link active">Admin</a>
+        <a href="/admin/users" class="nav-link">Users</a>
+        <a href="/admin/inbox" class="nav-link">Inbox ({{ stats.unread_messages }})</a>
+        <a href="/admin/change_password" class="nav-link">Settings</a>
+        <a href="/logout" class="nav-link">Logout</a>
+      </nav>
+    </header>
+
+    <section class="admin-container">
+      <div class="admin-header">
+        <h1>Admin Dashboard</h1>
+        <p>Manage Eliot Downloader system</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-content">
+            <div class="stat-number">{{ stats.total_users }}</div>
+            <div class="stat-label">Total Users</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⬇️</div>
+          <div class="stat-content">
+            <div class="stat-number">{{ stats.total_downloads }}</div>
+            <div class="stat-label">Total Downloads</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📧</div>
+          <div class="stat-content">
+            <div class="stat-number">{{ stats.unread_messages }}</div>
+            <div class="stat-label">Unread Messages</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📊</div>
+          <div class="stat-content">
+            <div class="stat-number">{{ stats.today_visits }}</div>
+            <div class="stat-label">Today's Visits</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-grid">
+        <div class="content-card">
+          <h2>Recent User Activity</h2>
+          <div class="activity-list">
+            {% for activity in recent_activities %}
+            <div class="activity-item">
+              <div class="activity-content">
+                <div class="activity-title">{{ activity.username }} - {{ activity.activity_type.replace('_', ' ').title() }}</div>
+                {% if activity.url %}
+                <div class="activity-details">{{ activity.url[:40] }}...</div>
+                {% endif %}
+              </div>
+              <div class="activity-time">{{ activity.created_at }}</div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="content-card">
+          <h2>Traffic Statistics (Last 7 Days)</h2>
+          <div class="traffic-chart">
+            {% for stat in traffic_stats %}
+            <div class="traffic-item">
+              <span class="traffic-date">{{ stat.date }}</span>
+              <span class="traffic-visits">{{ stat.visits }} visits</span>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>Eliot Downloader Admin Panel</div>
+        <div class="links">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

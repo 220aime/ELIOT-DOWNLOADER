@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard - Eliot Downloader</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <div class="brand">
+        <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+          <div class="brand-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <div class="brand-name">Eliot Downloader</div>
+        </a>
+      </div>
+
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/dashboard" class="nav-link active">Dashboard</a>
+        <a href="/logout" class="nav-link">Logout</a>
+      </nav>
+    </header>
+
+    <section class="dashboard-container">
+      <div class="dashboard-header">
+        <h1>Your Dashboard</h1>
+        <p>Welcome back, {{ session.username }}!</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📊</div>
+          <div class="stat-content">
+            <div class="stat-number">{{ stats.total_downloads }}</div>
+            <div class="stat-label">Total Downloads</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-content">
+            <div class="stat-number">{{ stats.successful_downloads }}</div>
+            <div class="stat-label">Successful</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📅</div>
+          <div class="stat-content">
+            <div class="stat-number">{{ stats.today_downloads }}</div>
+            <div class="stat-label">Today</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h2>Recent Activity</h2>
+        <div class="activity-list">
+          {% for activity in activities %}
+          <div class="activity-item">
+            <div class="activity-icon">
+              {% if activity.activity_type == 'login' %}📝
+              {% elif activity.activity_type == 'download_started' %}⬇️
+              {% elif activity.activity_type == 'download_completed' %}✅
+              {% else %}📋{% endif %}
+            </div>
+            <div class="activity-content">
+              <div class="activity-title">{{ activity.activity_type.replace('_', ' ').title() }}</div>
+              {% if activity.url %}
+              <div class="activity-details">{{ activity.url[:50] }}{% if activity.url|length > 50 %}...{% endif %}</div>
+              {% endif %}
+              {% if activity.format %}
+              <div class="activity-meta">Format: {{ activity.format }} | Quality: {{ activity.quality }}</div>
+              {% endif %}
+            </div>
+            <div class="activity-time">{{ activity.created_at }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>Eliot Downloader Dashboard</div>
+        <div class="links">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

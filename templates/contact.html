@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us - Eliot Downloader | Video Downloader</title>
+  <meta name="description" content="Get in touch with our team for support, questions, or feedback about our video downloading service." />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <header class="site-header" aria-label="Site header">
+      <div class="brand" aria-label="Brand">
+        <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+          <div class="brand-logo" aria-hidden="true">
+            <!-- Download icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <div class="brand-name">Eliot Downloader</div>
+        </a>
+      </div>
+
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/contact" class="nav-link active">Contact</a>
+      </nav>
+    </header>
+
+    <section class="page-content">
+      <div class="page-header">
+        <h1>Contact Us</h1>
+        <p class="page-subtitle">We're here to help with questions, support, and feedback</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="info-card">
+            <h3>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="info-icon">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              Support Topics
+            </h3>
+            <ul class="info-list">
+              <li>Technical issues and troubleshooting</li>
+              <li>Platform compatibility questions</li>
+              <li>Cookie upload assistance</li>
+              <li>Download quality problems</li>
+              <li>Feature requests and suggestions</li>
+              <li>General usage questions</li>
+            </ul>
+          </div>
+
+          <div class="info-card">
+            <h3>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="info-icon">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12,6 12,12 16,14"/>
+              </svg>
+              Response Times
+            </h3>
+            <ul class="info-list">
+              <li><strong>Technical Support:</strong> Within 24-48 hours</li>
+              <li><strong>General Inquiries:</strong> Within 2-3 business days</li>
+              <li><strong>Bug Reports:</strong> Within 24 hours</li>
+              <li><strong>Feature Requests:</strong> Response varies</li>
+            </ul>
+            <p class="info-note">We aim to respond as quickly as possible. Complex technical issues may take longer to resolve.</p>
+          </div>
+
+          <div class="info-card">
+            <h3>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="info-icon">
+                <path d="M9 11H3v5a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2M9 11V9a2 2 0 012-2v0a2 2 0 012 2v2M9 11h6"/>
+              </svg>
+              Before You Contact Us
+            </h3>
+            <ul class="info-list">
+              <li>Check if your issue is platform-specific</li>
+              <li>Try different video URLs to isolate problems</li>
+              <li>Ensure your browser allows pop-ups and downloads</li>
+              <li>Clear your browser cache and cookies</li>
+              <li>Try using different cookie files if applicable</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="contact-form-container">
+          <div class="content-card">
+            <h2>Send Us a Message</h2>
+            <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+
+            <div id="contactMessages" class="messages" aria-live="polite"></div>
+
+            <form id="contactForm" class="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Full Name *</label>
+                  <input type="text" id="name" name="name" required>
+                  <div class="field-error" id="nameError"></div>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email Address *</label>
+                  <input type="email" id="email" name="email" required>
+                  <div class="field-error" id="emailError"></div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="location">Location (City, Country)</label>
+                <input type="text" id="location" name="location" placeholder="e.g., Phoenix, Arizona, USA">
+                <div class="form-help">This helps us provide better region-specific support</div>
+              </div>
+
+              <div class="form-group">
+                <label for="subject">Subject *</label>
+                <select id="subject" name="subject" required>
+                  <option value="">Please select a topic</option>
+                  <option value="technical-issue">Technical Issue</option>
+                  <option value="platform-support">Platform Support Question</option>
+                  <option value="cookie-help">Cookie Upload Help</option>
+                  <option value="download-problem">Download Quality Problem</option>
+                  <option value="feature-request">Feature Request</option>
+                  <option value="bug-report">Bug Report</option>
+                  <option value="general">General Question</option>
+                  <option value="other">Other</option>
+                </select>
+                <div class="field-error" id="subjectError"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Your Question or Message *</label>
+                <textarea 
+                  id="message" 
+                  name="message" 
+                  rows="6" 
+                  required
+                  placeholder="Please provide as much detail as possible. For technical issues, include:&#10;- What you were trying to do&#10;- What platform you were using (YouTube, Vimeo, etc.)&#10;- Any error messages you received&#10;- Your browser and operating system"></textarea>
+                <div class="field-error" id="messageError"></div>
+                <div class="char-counter">
+                  <span id="charCount">0</span>/2000 characters
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="privacy" name="privacy" required>
+                  <div class="checkbox-custom"></div>
+                  I agree to the <a href="/privacy" target="_blank">Privacy Policy</a> and consent to having my information processed for support purposes *
+                </label>
+                <div class="field-error" id="privacyError"></div>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" id="submitBtn" class="btn btn-primary">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22,2 15,22 11,13 2,9 22,2"/>
+                  </svg>
+                  <span id="submitText">Send Message</span>
+                </button>
+                <div class="form-help">
+                  We typically respond within 24-48 hours for support requests.
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>
+          <strong>Heads‑up:</strong> Some platforms restrict downloads in their Terms. Only download content you own or have permission to use.
+        </div>
+        <div class="links">
+          <a href="/privacy" rel="nofollow">Privacy</a>
+          <a href="/terms" rel="nofollow">Terms</a>
+          <a href="/contact" rel="nofollow">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Contact Form JavaScript -->
+  <script src="{{ url_for('static', filename='js/contact.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inbox - Eliot Downloader Admin</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <div class="brand">
+        <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+          <div class="brand-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <div class="brand-name">Eliot Downloader</div>
+        </a>
+      </div>
+
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/admin/dashboard" class="nav-link">Dashboard</a>
+        <a href="/admin/users" class="nav-link">Users</a>
+        <a href="/admin/inbox" class="nav-link active">Inbox</a>
+        <a href="/admin/change_password" class="nav-link">Settings</a>
+        <a href="/logout" class="nav-link">Logout</a>
+      </nav>
+    </header>
+
+    <section class="admin-container">
+      <div class="admin-header">
+        <h1>Contact Inbox</h1>
+        <p>Manage user inquiries and support requests</p>
+      </div>
+
+      <div class="inbox-filters">
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">
+            All Messages ({{ messages|length }})
+          </button>
+          <button class="filter-btn" data-filter="unread">
+            Unread ({{ messages|selectattr("status", "equalto", "unread")|list|length }})
+          </button>
+          <button class="filter-btn" data-filter="read">
+            Read ({{ messages|selectattr("status", "equalto", "read")|list|length }})
+          </button>
+        </div>
+        <div class="bulk-actions">
+          <button id="markAllRead" class="btn btn-sm btn-secondary">Mark All as Read</button>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="messages-list">
+          {% for message in messages %}
+          <div class="message-item {{ 'unread' if message.status == 'unread' else 'read' }}"
+               data-message-id="{{ message.id }}"
+               data-status="{{ message.status }}">
+            <div class="message-header">
+              <div class="message-sender">
+                <div class="sender-info">
+                  <span class="sender-name">{{ message.name }}</span>
+                  <span class="sender-email">{{ message.email }}</span>
+                  {% if message.location %}
+                    <span class="sender-location">{{ message.location }}</span>
+                  {% endif %}
+                </div>
+                <div class="message-meta">
+                  <span class="message-date">{{ message.created_at[:16] }}</span>
+                  <span class="message-ip">{{ message.ip_address }}</span>
+                </div>
+              </div>
+              <div class="message-actions">
+                {% if message.status == 'unread' %}
+                  <button class="btn btn-sm btn-primary mark-read" data-message-id="{{ message.id }}">
+                    Mark as Read
+                  </button>
+                {% else %}
+                  <button class="btn btn-sm btn-secondary mark-unread" data-message-id="{{ message.id }}">
+                    Mark as Unread
+                  </button>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="message-subject">
+              <strong>Subject:</strong> {{ message.subject }}
+              {% if message.status == 'unread' %}
+                <span class="unread-indicator">NEW</span>
+              {% endif %}
+            </div>
+
+            <div class="message-content">
+              <div class="message-text">{{ message.message }}</div>
+            </div>
+
+            <div class="message-footer">
+              <div class="message-category">
+                <span class="category-tag category-{{ message.subject.lower().replace(' ', '-') }}">
+                  {{ message.subject }}
+                </span>
+              </div>
+              <div class="message-tools">
+                <button class="btn btn-sm btn-outline reply-btn" data-email="{{ message.email }}" data-name="{{ message.name }}">
+                  Reply
+                </button>
+                <button class="btn btn-sm btn-danger delete-msg" data-message-id="{{ message.id }}">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        {% if not messages %}
+        <div class="empty-state">
+          <div class="empty-icon">📧</div>
+          <h3>No Messages Yet</h3>
+          <p>Contact form submissions will appear here.</p>
+        </div>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- Reply Modal -->
+    <div id="replyModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Reply to Message</h3>
+          <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="replyForm">
+            <div class="form-group">
+              <label>To:</label>
+              <input type="email" id="replyTo" readonly>
+            </div>
+            <div class="form-group">
+              <label>Subject:</label>
+              <input type="text" id="replySubject" value="Re: ">
+            </div>
+            <div class="form-group">
+              <label>Message:</label>
+              <textarea id="replyMessage" rows="10" placeholder="Type your reply..."></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Send Reply</button>
+              <button type="button" class="btn btn-secondary modal-close">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="foot">
+        <div>Eliot Downloader Admin Panel</div>
+        <div class="links">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>
