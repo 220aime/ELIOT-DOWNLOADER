@@ -1204,4 +1204,4 @@ if __name__ == "__main__":
     log.info(
         f"Supported platforms with cookie requirements: {[k for k, v in PLATFORM_CONFIGS.items() if v.get('requires_cookies')]}")
     log.info("Open: http://127.0.0.1:5000")
-    socketio.run(app, host="127.0.0.1", port=5000, debug=True, allow_unsafe_werkzeug=True)m
+    socketio.run(app, host="127.0.0.1", port=5000, debug=True, allow_unsafe_werkzeug=True)
