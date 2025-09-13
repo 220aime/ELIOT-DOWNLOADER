@@ -1,7 +1,6 @@
+streamlit
 Flask==2.3.3
 Flask-SocketIO==5.3.6
-yt-dlp>=2024.12.13
 python-socketio==5.8.0
 Werkzeug==2.3.7
-Flask==2.3.3
-
+yt-dlp>=2024.12.13
